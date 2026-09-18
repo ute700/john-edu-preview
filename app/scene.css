@@ -1,0 +1,27 @@
+/* Approved V7 animation. Geometry remains tied to the same 2:3 canvas. */
+.world-scene{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:-2;isolation:isolate}
+.motion-scene{position:relative;width:100%;aspect-ratio:2/3;overflow:hidden;isolation:isolate;background:#c3d9e4}
+.motion-base{display:block;width:100%;height:auto;aspect-ratio:2/3;user-select:none}
+.motion-details{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.motion-eagle,.motion-phoenix{position:absolute;aspect-ratio:1;pointer-events:none;will-change:transform}
+.motion-eagle{left:67%;top:27.5%;width:29%;animation:motion-eagle-glide 37s ease-in-out infinite alternate;animation-delay:-11s}
+.motion-phoenix{left:23.5%;top:2.5%;width:28%;animation:motion-phoenix-glide 49s ease-in-out infinite alternate;animation-delay:-19s}
+.motion-eagle span,.motion-phoenix span{display:block;width:100%;height:100%;background-image:url('./assets/eagle-phoenix-atlas-v8.png');background-repeat:no-repeat;background-size:200% 100%}
+.motion-eagle span{background-position:0% 50%}.motion-phoenix span{background-position:100% 50%;clip-path:polygon(10% 0,100% 0,100% 100%,0 100%,0 62%,10% 62%)}
+.motion-cloud{position:absolute;width:43%;height:12%;background:radial-gradient(ellipse,#ffffff17,transparent 70%);border-radius:50%;animation:motion-cloud-drift 96s ease-in-out infinite alternate}
+.motion-cloud-left{left:1%;top:26%;animation-delay:-37s}.motion-cloud-right{left:59%;top:41%;opacity:.65;animation-duration:119s;animation-delay:-59s}
+.motion-waterfall{position:absolute;inset:0;clip-path:polygon(30.2% 37.6%,33.4% 37.4%,33.4% 40.4%,32% 43.2%,30.3% 45.1%,28.5% 45.1%,30.5% 41.5%);background:repeating-linear-gradient(to bottom,transparent 0,transparent 17px,#ffffff35 21px,transparent 25px);opacity:.25;animation:motion-water-flow 16s linear infinite}
+.motion-lake{position:absolute;inset:0;clip-path:polygon(77% 57.1%,86% 56.4%,94% 56%,91% 57.5%,97% 59.9%,93% 63.2%,87% 62.5%,90% 61.1%,82% 60%);background:repeating-linear-gradient(176deg,transparent 0,transparent 24px,#ffeeb725 26px,transparent 28px);opacity:.24;animation:motion-lake-reflection 23s ease-in-out infinite alternate}
+.motion-leaves{position:absolute;inset:0;background-image:url('./assets/mountain-motion-base-v8.png');background-size:100% 100%;clip-path:polygon(0% 43.5%,4.7% 43.2%,8% 48%,12.1% 53%,10.7% 58%,5% 61.2%,0% 61%);transform-origin:1% 63%;animation:motion-leaf-sway 17s ease-in-out infinite alternate}
+@keyframes motion-eagle-glide{0%{transform:translate(-10px,5px) rotate(-.5deg)}50%{transform:translate(4px,-7px) rotate(0deg)}100%{transform:translate(20px,1px) rotate(.5deg)}}
+@keyframes motion-phoenix-glide{0%{transform:translate(-7px,5px) rotate(-.3deg)}50%{transform:translate(3px,-7px) rotate(.1deg)}100%{transform:translate(13px,1px) rotate(.4deg)}}
+@keyframes motion-cloud-drift{from{transform:translateX(-5px)}to{transform:translateX(15px)}}
+@keyframes motion-water-flow{from{background-position:0 0}to{background-position:0 25px}}
+@keyframes motion-lake-reflection{from{background-position:0 0;opacity:.15}to{background-position:4px 1px;opacity:.28}}
+@keyframes motion-leaf-sway{from{transform:rotate(-.08deg)}to{transform:rotate(.1deg)}}
+.is-paused .motion-scene *,.motion-scene.is-paused *,.still .motion-scene *,.page-hidden .motion-scene *,.tab-hidden .motion-scene *{animation-play-state:paused!important}
+[data-playing="false"] .motion-scene *,[data-reduced="true"] .motion-scene *{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){.motion-scene *{animation:none!important}}
+
+.world-hiker{position:absolute;bottom:0;left:-48px;width:42px;height:63px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 2px 2px #244b3340)}
+@media(max-width:650px){.world-hiker{width:36px;height:54px;left:-41px}}
