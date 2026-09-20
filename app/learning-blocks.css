@@ -1,0 +1,66 @@
+/* Scoped to the approved lesson-1 example pilot; other lesson views stay intact. */
+.lesson-copy .lesson1-pilot{color:#262a2d;font-size:18px;line-height:1.8;word-break:keep-all;overflow-wrap:anywhere}
+.lesson1-pilot .learning-goal{margin:0 0 28px;padding-bottom:20px;border-bottom:1px solid #dedfe0;color:#50565a;font-size:16px;line-height:1.75}
+.lesson1-pilot .learning-block{margin:0 0 28px}
+.lesson1-pilot .learning-block h3{margin:0 0 10px;font-family:inherit;font-size:21px;line-height:1.5;font-weight:700;color:#24282b}
+.lesson1-pilot .learning-block p{margin:0 0 10px;color:inherit;font-size:inherit;line-height:inherit}
+.lesson1-pilot .learning-block p:last-child{margin-bottom:0}
+.lesson1-pilot .learning-case-context{color:#50565a;font-size:16px}
+.lesson1-pilot .learning-comparison{width:100%;table-layout:fixed;border-collapse:collapse;margin:18px 0 0;font-size:17px;line-height:1.65;text-align:left;color:#292d30}
+.lesson1-pilot .learning-comparison caption{text-align:left;font-size:15px;font-weight:500;color:#555d62;padding:0 0 9px}
+.lesson1-pilot .learning-comparison th,.lesson1-pilot .learning-comparison td{border:1px solid #d9dcde;padding:13px 15px;vertical-align:top;word-break:keep-all;overflow-wrap:anywhere}
+.lesson1-pilot .learning-comparison thead th{background:#eceeef;font-weight:700}
+.lesson1-pilot .learning-comparison th:first-child{width:36%}
+.lesson1-pilot .learning-comparison tbody th{background:#f7f7f7;font-weight:500}
+.lesson1-pilot .learning-comparison-label{display:none}
+.lesson1-pilot .learning-calculation{margin:0;padding:17px 0 20px;display:flex;flex-wrap:wrap;gap:4px 18px;border-bottom:1px solid #e1e2e3}
+.lesson1-pilot .learning-calculation span{color:#555d62;font-size:15px}
+.lesson1-pilot .learning-calculation strong{font-size:18px;font-weight:650;color:#24282b}
+.lesson1-pilot .learning-block--conditions{margin:18px 0 0;padding-left:17px;border-left:3px solid #a6abad;font-size:16px;line-height:1.8}
+.lesson1-pilot .learning-block--conditions h3{font-size:17px}
+.lesson1-pilot .learning-decision-flow{margin:0 0 28px;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:10px;counter-reset:step}
+.lesson1-pilot .learning-decision-flow li{margin:0;padding:12px 14px;background:#f2f3f3;border-radius:5px;font-size:16px;line-height:1.7;counter-increment:step}
+.lesson1-pilot .learning-decision-flow li::before{content:counter(step) '. ';font-weight:700}
+.lesson1-pilot .learning-block--key{padding:21px 23px;background:#f1f2f2;border-left:3px solid #41494d}
+.lesson1-pilot .learning-block--key p:first-of-type{font-weight:650;font-size:20px}
+.lesson1-pilot .learning-block--key p:last-child{font-size:16px;color:#525a5e}
+.lesson1-pilot .learning-block--reflection{border-top:1px solid #dedfe0;padding-top:23px;margin-bottom:0}
+.lesson1-pilot .learning-block--reflection p:last-child{font-size:15px;color:#555d62}
+@media(max-width:600px){
+ .lesson1-pilot .learning-goal{font-size:15px;margin-bottom:24px}
+ .lesson1-pilot .learning-block{margin-bottom:25px}
+ .lesson1-pilot .learning-block h3{font-size:20px}
+ .lesson1-pilot .learning-comparison{font-size:16px;line-height:1.6}
+ .lesson1-pilot .learning-comparison th,.lesson1-pilot .learning-comparison td{padding:11px 8px}
+ .lesson1-pilot .learning-comparison th:first-child{width:34%}
+ .lesson1-pilot .learning-calculation strong{font-size:17px}
+ .lesson1-pilot .learning-block--conditions{font-size:16px;padding-left:13px;margin-bottom:0}
+ .lesson1-pilot .learning-block--conditions h3{font-size:17px}
+ .lesson1-pilot .learning-decision-flow{grid-template-columns:1fr;gap:6px}
+ .lesson1-pilot .learning-decision-flow li{padding:10px 13px}
+ .lesson1-pilot .learning-block--key{padding:18px}
+ .lesson1-pilot .learning-block--key p:first-of-type{font-size:19px}
+ .lesson1-pilot .learning-block--reflection{margin-bottom:0}
+}
+@media(max-width:480px){
+ .lesson1-pilot .learning-goal{margin-bottom:16px;padding-bottom:12px}
+ .lesson1-pilot .learning-block{margin-bottom:18px}
+ .lesson1-pilot .learning-block h3{margin-bottom:8px}
+ .lesson1-pilot .learning-comparison{display:block;margin-top:12px}
+ .lesson1-pilot .learning-comparison caption{display:block;padding-bottom:8px}
+ /* Keep column headers available to assistive technology in the stacked layout. */
+ .lesson1-pilot .learning-comparison thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .lesson1-pilot .learning-comparison tbody{display:block}
+ .lesson1-pilot .learning-comparison tbody tr{display:grid;grid-template-columns:minmax(0,1fr);border:1px solid #d9dcde;margin-bottom:10px}
+ .lesson1-pilot .learning-comparison tbody tr:last-child{margin-bottom:0}
+ .lesson1-pilot .learning-comparison tbody th:first-child{display:block;width:auto;padding:8px 12px;border:0;border-bottom:1px solid #d9dcde;font-weight:650}
+ .lesson1-pilot .learning-comparison td{display:grid;grid-template-columns:2.5em minmax(0,1fr);gap:8px;padding:7px 12px;border:0}
+ .lesson1-pilot .learning-comparison td+td{padding-top:0}
+ .lesson1-pilot .learning-comparison-label{display:block;font-weight:650;color:#50565a}
+ .lesson1-pilot .learning-calculation{padding:12px 0}
+ .lesson1-pilot .learning-block--conditions{margin:14px 0 0}
+ .lesson1-pilot .learning-decision-flow{margin-bottom:18px;gap:4px}
+ .lesson1-pilot .learning-decision-flow li{padding:0;background:none;border-radius:0}
+ .lesson1-pilot .learning-block--key{padding:14px 16px}
+ .lesson1-pilot .learning-block--reflection{padding-top:16px;margin-bottom:0}
+}
