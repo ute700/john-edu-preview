@@ -1,9 +1,8 @@
-import { createStorageAdapter } from './storage.js';
 export const STORAGE_KEY = 'john-edu:representative-unit:v1';
 export const LESSON_IDS = ['lesson-1', 'lesson-2', 'lesson-3', 'lesson-4', 'lesson-5'];
 
 /** Browser-only prototype. This is not a secure assessment or entitlement service. */
-export function createProgressStore({ lessons, storage, adapter = createStorageAdapter(storage), now = () => new Date().toISOString() } = {}) {
+export function createProgressStore({ lessons, storage, now = () => new Date().toISOString() } = {}) {
   const lessonIds = (lessons || []).map(lesson => lesson.id);
   if (new Set(lessonIds).size !== lessonIds.length || lessonIds.some(id => typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(id) || id === '__proto__') || LESSON_IDS.some((id,index) => lessonIds[index] !== id)) throw new Error('Invalid lesson sequence');
   const definitions = new Map((lessons || []).map(lesson => [lesson.id, lesson.quiz]));
@@ -19,6 +18,11 @@ export function createProgressStore({ lessons, storage, adapter = createStorageA
     const quiz = definitions.get(id);
     if (!quiz?.options?.some(option => option.id === quiz.correctOptionId)) throw new Error(`Invalid quiz: ${id}`);
   }
+  let storageAvailable = true;
+  if (storage === undefined) {
+    try { storage = globalThis.localStorage; } catch { storageAvailable = false; }
+  }
+  if (!storage) storageAvailable = false;
   let attempts = Object.fromEntries(lessonIds.map(id => [id, []]));
 
   function restore(raw) {
@@ -40,12 +44,13 @@ export function createProgressStore({ lessons, storage, adapter = createStorageA
       }
     }
   }
-  const restored = adapter.read(STORAGE_KEY, value => !value || typeof value !== 'object' ? 'corrupt' : value.version !== 1 ? 'unsupported' : value.attempts && typeof value.attempts === 'object' && !Array.isArray(value.attempts) ? true : 'corrupt');
-  restore(restored);
-  if (restored && Object.entries(restored.attempts).some(([id, values]) => !lessonIds.includes(id) || !Array.isArray(values) || values.length !== attempts[id].length)) adapter.protect(STORAGE_KEY);
+  try { if (storageAvailable) restore(JSON.parse(storage.getItem(STORAGE_KEY))); }
+  catch (error) { if (!(error instanceof SyntaxError)) storageAvailable = false; }
 
   function save() {
-    adapter.write(STORAGE_KEY, { version: 1, attempts });
+    if (!storageAvailable) return;
+    try { storage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, attempts })); }
+    catch { storageAvailable = false; }
   }
   function getState() {
     const completedLessonIds = lessonIds.filter(isCompleted);
@@ -55,9 +60,7 @@ export function createProgressStore({ lessons, storage, adapter = createStorageA
       completedLessonIds,
       representativeUnitCompleted: LESSON_IDS.every(id => completedLessonIds.includes(id)),
       fullCourseCompleted: lessonIds.length === 165 && lessonIds.every((id,index)=>id === `lesson-${index+1}`) && completedLessonIds.length === 165,
-      storageAvailable: adapter.getStatus(STORAGE_KEY).available,
-      storageStatus: adapter.getStatus(STORAGE_KEY).status,
-      storageMessage: adapter.getStatus(STORAGE_KEY).message
+      storageAvailable
     };
   }
   function getLessonStatus(id) {
